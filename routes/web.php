@@ -14,5 +14,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return 'Selamat Datang';
 });
+
+Route::get('/world', function () {
+    return view('World');
+});
+
+Route::get('/about', function () {
+    return '2341760001_Axelo Matthew Terang Barus';
+});
+
+Route::redirect('/here', '/there');
+
+Route::view('/welcome', 'welcome');
+Route::view('/welcome', 'welcome', ['name' => 'Taylor']);
