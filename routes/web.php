@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// Praktikum 1
 
 Route::get('/', function () {
     return 'Selamat Datang';
@@ -25,7 +28,37 @@ Route::get('/about', function () {
     return '2341760001_Axelo Matthew Terang Barus';
 });
 
-Route::redirect('/here', '/there');
+// Route params
 
-Route::view('/welcome', 'welcome');
-Route::view('/welcome', 'welcome', ['name' => 'Taylor']);
+Route::get('/user{name}', function($name){
+    return 'Nama saya '. $name;
+});
+
+Route::get('/posts/{post}/comments/{comment}', function($postId, $commentId){
+   return 'Post ke-'. $postId . " Komentar ke-:". $commentId;
+});
+
+Route::get('/articles/{id}', function($id){
+    return 'Halaman artikel dengan id '. $id;
+});
+
+//Praktikum
+
+//Route::get('user/{name?}', function($name = null){
+//    return 'Nama Saya' . $name;
+//});
+
+Route::get('/user/{name?}', function ($name='John') {
+    return 'Nama saya '.$name;
+});
+
+Route::get('/user/profile', function () {
+//
+})->name('profile');
+Route::get(
+    '/user/profile',[UserProfileController::class, 'show']
+)->name('profile');
+// Generating URLs...
+$url = route('profile');
+// Generating Redirects...
+return redirect()->route('profile');
