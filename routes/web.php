@@ -1,6 +1,14 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\PhotoController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\ArticleController;
+
+
 
 
 /*
@@ -16,17 +24,19 @@ use Illuminate\Support\Facades\Route;
 
 // Praktikum 1
 
-Route::get('/', function () {
-    return 'Selamat Datang';
-});
+//Route::get('/', function () {
+//    return 'Selamat Datang';
+//});
 
-Route::get('/world', function () {
-    return view('World');
-});
+// Route::get('/world', function () {
+//     return view('World');
+// });
 
-Route::get('/about', function () {
-    return '2341760001_Axelo Matthew Terang Barus';
-});
+
+
+// Route::get('/about', function () {
+//     return '2341760001_Axelo Matthew Terang Barus';
+// });
 
 // Route params
 
@@ -38,9 +48,9 @@ Route::get('/posts/{post}/comments/{comment}', function($postId, $commentId){
    return 'Post ke-'. $postId . " Komentar ke-:". $commentId;
 });
 
-Route::get('/articles/{id}', function($id){
-    return 'Halaman artikel dengan id '. $id;
-});
+//Route::get('/articles/{id}', function($id){
+//    return 'Halaman artikel dengan id '. $id;
+//});
 
 //Praktikum
 
@@ -52,13 +62,19 @@ Route::get('/user/{name?}', function ($name='John') {
     return 'Nama saya '.$name;
 });
 
-Route::get('/user/profile', function () {
-//
-})->name('profile');
-Route::get(
-    '/user/profile',[UserProfileController::class, 'show']
-)->name('profile');
-// Generating URLs...
-$url = route('profile');
-// Generating Redirects...
-return redirect()->route('profile');
+// Praktikum 2
+
+//Route::get('/hello', [WelcomeController::class,'hello']);
+
+//Route::get('/world', [PageController::class,'world']);
+
+
+Route::get('/about',[HomeController::class,'about']);
+
+Route::get('/home',[HomeController::class, 'home']);
+
+Route::get('/',[PageController::class, 'index']);
+
+Route::get('/articles/{id}',[ArticleController::class, 'articles']);
+
+Route::resource('photos',PhotoController::class);
